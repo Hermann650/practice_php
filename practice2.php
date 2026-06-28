@@ -54,43 +54,62 @@
     // Terakhir cetak total: "Total: Rp xxx.xxx"
     // ============================================================
 
-    // $prices = [30000, 75000, 120000, 45000, 90000, 50000];
+    $prices = [30000, 75000, 120000, 45000, 90000, 50000];
 
-    // $total = array_reduce($prices, function ($total, $price) {
-    //     $final = /* ... */;
-    //     return /* ... */;
-    // }, 0);
+    $total = array_reduce($prices, function ($total, $price) {
+        $final = $price > 50000 ? $price * 0.9 : $price;
+        return $final + $total;
+    }, 0);
 
-    // echo "Total: Rp " . /* ... */ . "\n";
+    echo "Total: Rp " . number_format($total) . "\n";
 
     // Mini Task - 4 - Class Persegi Panjang
     // Lengkapi code berikut untuk menghitung luas dan permukaan persegi panjang 
     // Area : P * L
     // Perimeter : 2 * (P + L)
-    // class Rectangle {
-    //     public float $length;
-    //     public float $width;
+    class Rectangle {
+        public float $length;
+        public float $width;
 
-    //     public function __construct(float /*...*/, float /*...*/) {
-    //         // code here ...
-    //     }
+        public function __construct(float $length, float $width) {
+            $this->length = $length;
+            $this->width = $width;
+        }
 
-    //     public function getArea(): float {
-    //         // code here ...
-    //     }
+        public function getArea(): float {
+            return $this->length * $this->width;
+        }
 
-    //     public function getPerimeter(): float {
-    //         // code here ...
-    //     }
-    // }
+        public function getPerimeter(): float {
+            return 2 * ($this->length + $this->width);
+        }
+    }
 
-    // $rectangle = new Rectangle(10, 5);
-    // echo "Rectangle Area: ".$rectangle->getArea()."\n";       
-    // echo "Rectangle Perimeter: ".$rectangle->getPerimeter()."\n"; 
+    $rectangle = new Rectangle(10, 5);
+    echo "Rectangle Area: ".$rectangle->getArea()."\n";       
+    echo "Rectangle Perimeter: ".$rectangle->getPerimeter()."\n"; 
 
     // Mini Task - 5 - Class Persegi
     // Buat class, object, method, dan props untuk menghitung keliling dan luas persegi
     // Area : S * S
     // Perimeter : 4 * S
-    // Code here...  
+    class Square {
+        public float $side;
+
+        public function __construct(float $side) {
+            $this->side = $side;
+        }
+
+        public function getArea(): float {
+            return $this->side * $this->side;
+        }
+
+        public function getPerimeter(): float {
+            return 4 * $this->side;
+        }
+    }
+
+    $square = new Square(20);
+    echo "Square Area: ".$square->getArea()."\n";       
+    echo "Square Perimeter: ".$square->getPerimeter()."\n"; 
 ?>
