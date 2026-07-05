@@ -4,48 +4,66 @@
         
         public function __construct(string $restaurantName) {
             // Make sure branch name and customer name are capitalized
-            // code here ...
+            $this->restaurantName = $restaurantName;
         }
 
         public function welcome(): string {
-            // code here ...
+            return "Welcome to " . $this->restaurantName;
         }
 
         public function welcomeBranch(): string {
-            // code here ...
+            return "This our branch " . $this->branchName;
         }
 
         public function greetCustomer(): string {
             // Welcoming drinks are special for our member
-            // code here ...
+            $nameGreet = "Hello " . $this->customerName . ", here's the menu.";
+            return $nameGreet . "\n" . ($this->isMember ? "Before you order, you can enjoy this welcoming drink" : "");
         }
     }
 
     class Cafe extends Restaurant {
-        // code here ...
+        public string $branchName;
+        public string $customerName;
+        public bool $isMember;
 
         public function __construct(string $restaurantName, string $branchName, string $customerName, bool $isMember) {
-            // Make sure branch name and customer name are capitalized
-            // code here ...
+            parent::__construct($restaurantName);
+            $this->isMember = $isMember;
+            $this->branchName = ucwords($branchName);
+            $this->customerName = ucwords($customerName);
         }
 
         public function offerMenu(): string {
             // Menu : "Americano", "Latte", "Matcha", "Brownies"
-            // code here ...
+            $cafeMenu = "";
+            $menu = ["Americano", "Latte", "Matcha", "Brownies"];
+            foreach ($menu as $cenu) {
+                $cafeMenu .= "- " . $cenu . "\n"; 
+            }
+            return $cafeMenu;
         }
     }
 
     class Canteen extends Restaurant {
-        // code here ...
+        public string $customerName;
+        public string $branchName;
 
         public function __construct(string $restaurantName, string $branchName, string $customerName) {
             // Make sure branch name and customer name are capitalized
-            // code here ...
+            parent::__construct($restaurantName);
+            $this->customerName = ucwords($customerName);
+            $this->branchName = ucwords($branchName);
         }
 
         public function offerMenu(): string {
             // Menu : "Ayam Geprek", "Nasi Padang", "Nasi Kuning"
-            // code here ...
+            $canteenMenu = "";
+            $cmenu = ["Ayam Geprek", "Nasi Padang", "Nasi Kuning"];
+            foreach ($cmenu as $teen) {
+                $canteenMenu .= "- " . $teen . "\n"; 
+            }
+            return $canteenMenu;
         }
     }
 
@@ -56,7 +74,11 @@
     print_r($cafe->greetCustomer()."\n");
     print_r($cafe->offerMenu()."\n");
 
-    // code here ....
+    print_r($mainRestaurant->welcome()."\n");
+    $cafe = new Cafe("Restaurant A", "Cafe B", "Lucy", false);
+    print_r($cafe->welcomeBranch()."\n");
+    print_r($cafe->greetCustomer()."\n");
+    print_r($cafe->offerMenu()."\n");
     // Declare new object for non-member customer, dont forget to welcome, greet our customer, and offer them our menu
 
     $mainRestaurant = new Restaurant("Restaurant A");
