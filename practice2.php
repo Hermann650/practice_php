@@ -62,12 +62,31 @@
     }, 0);
 
     echo "Total: Rp " . number_format($total) . "\n";
+    
 
+
+    class Shape {
+        public string $name;
+
+        public function __construct(string $name) {
+            $this->name = $name;
+        }
+
+        public function render(): string {
+            $render = $this->getArea() . "cm" . " " . "&" . " " . $this->getPerimeter() . "cm";
+            return "The area and perimeter is: " . $render; 
+        }
+
+        public function render3d(): string {
+            $render = $this->getVolume() . "cm^3";
+            return "The volume of " . $this->name . " is: " . $render;
+        }
+    }
     // Mini Task - 4 - Class Persegi Panjang
     // Lengkapi code berikut untuk menghitung luas dan permukaan persegi panjang 
     // Area : P * L
     // Perimeter : 2 * (P + L)
-    class Rectangle {
+    class Rectangle extends Shape {
         public float $length;
         public float $width;
 
@@ -85,15 +104,13 @@
         }
     }
 
-    $rectangle = new Rectangle(10, 5);
-    echo "Rectangle Area: ".$rectangle->getArea()."\n";       
-    echo "Rectangle Perimeter: ".$rectangle->getPerimeter()."\n"; 
-
+    $rectangle = new Rectangle(10, 5); 
+    echo $rectangle->render() . "\n";
     // Mini Task - 5 - Class Persegi
     // Buat class, object, method, dan props untuk menghitung keliling dan luas persegi
     // Area : S * S
     // Perimeter : 4 * S
-    class Square {
+    class Square extends Shape {
         public float $side;
 
         public function __construct(float $side) {
@@ -110,6 +127,27 @@
     }
 
     $square = new Square(20);
-    echo "Square Area: ".$square->getArea()."\n";       
-    echo "Square Perimeter: ".$square->getPerimeter()."\n"; 
+     echo $square->render() . "\n"; 
+    class Block extends Shape {
+        public float $height;
+        public float $width;
+        public float $length;
+
+        public function __construct(string $name, float $height, float $width, float $length) {
+            parent::__construct($name);
+            $this->height = $height;
+            $this->width = $width;
+            $this->length = $length;
+        }
+
+        public function getVolume(): float {
+            return $this->length * $this->width * $this->height;
+        }
+     }
+
+     $block = new Block("blockyBlock", 100, 200, 90);
+     echo $block->render3d() . "\n";
+    $new = new Shape("Johnny");
+    echo $new->name;
+    //echo $new->width;
 ?>
